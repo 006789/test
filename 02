@@ -1,0 +1,38 @@
+002361 14:34:05
+#include<stdio.h>
+
+int main()
+{
+	printf("请输入一个字符串\n");
+	char a[50];
+	int num=0;
+	gets(a);
+	for(int i=0;a[i]!='\0';i++)
+	{
+		if(a[i]=='i'&&a[i+1]=='n')
+		{
+				num++;
+		}
+			
+	}
+	printf("该字符串中有%d个in",num);
+	printf("请输入一个字符串\n");
+	char s[50];
+	int num1=0;
+	gets(s);
+	for(int j=0;s[j]!='\0';j++)
+	{
+		if(s[j]=='i'&&s[j+1]=='t')
+		{
+				num1++;
+		}
+			
+	}
+	printf("该字符串中有%d个it",num1);
+	return 0;
+	
+}
+
+5班-赵娟-13101132795-x207 19:52:09
+https://github.com/
+
