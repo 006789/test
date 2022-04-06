@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+double calc(char *s){
+	double a_czs[20],czs1;;
+	char a_ysf[20];
+	int cnt_czs=0,cnt_ysf=0;
+	a_czs[cnt_czs]=atof(s);//提取的第一个操作数！
+	while(isdigit(*s)||*s=='.'||*s==' ')s++;
+	while(*s!='\0'){
+		char ysf;
+		double czs;
+		ysf=*s;
+		s++;
+		czs=atof(s);
+		while(isdigit(*s)||*s=='.'||*s==' ')s++;
+		if(ysf=='+'||ysf=='-'){
+			a_ysf[cnt_ysf]=ysf;
+			cnt_ysf++;cnt_czs++;
+			a_czs[cnt_czs]=czs;
+		}
+		else{
+			switch(ysf){
+			case '*':a_czs[cnt_czs]*=czs;break;
+			case '/':a_czs[cnt_czs]/=czs;break;
+			}
+		}
+	}
+	for(int i=0;i<=cnt_czs;i++)
+		printf("%8.2lf",a_czs[i]);
+	printf("\n");
+	for(i=0;i<cnt_ysf;i++)
+		printf("%4c",a_ysf[i]);
+	printf("\n");
+
+	czs1=a_czs[0];
+	for(i=0;i<cnt_ysf;i++){
+			switch(a_ysf[i]){	
+		case '+':czs1+=a_czs[i+1];break;
+		case '-':czs1-=a_czs[i+1];break;}}
+	return czs1;
+}
+ int main()
+{
+	//定义变量 
+	char s[41]="QUIT"; 
+	printf("%s\n",strlwr(s));
+
+	while(1){
+		double result;
+		puts("请输入四则运算表达式:");
+		gets(s);
+		if(strcmp(s,"quit")==0)
+			return 0;
+		else{
+			result=calc(s);//计算并输出表达式的值！
+			printf("%s对应的值为；%.3lf\n",s,result); 
+			 } 
+	}		 
+}
