@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef struct stu{
+	char name[20];
+	long long xh;
+	int age;
+	struct stu *next;
+}stu;
+stu *head=NULL,*tail=NULL;
+stu *create()
+{
+	printf("请输入学生总人数\n"); 
+	int t;
+	scanf("%d",&t);
+	printf("请输入表内数据:\n");
+	printf("姓名                学号     年龄\n"); 
+	for(int i=0;i<t;i++)
+	{
+		if(i==0)
+		{
+			tail=head=(stu *) malloc (sizeof(stu));
+			scanf("%s%lld%d",&head->name,&head->xh,&head->age);
+			head->next=NULL;
+		}
+		else
+        {
+			tail=tail->next=(stu *) malloc (sizeof(stu));
+			scanf("%s%lld%d",&tail->name,&tail->xh,&tail->age);
+			tail->next=NULL;
+		}
+	}
+	return head;
+}
+void value(stu *p)
+{
+	printf("姓名                学号     年龄\n"); 
+    while(p!=NULL)
+    {
+		printf("%-20s %-9lld %d\n",p->name,p->xh,p->age);
+		p=p->next;
+	}
+}
+stu *Delete(stu *p,stu *q)
+{
+	p->next=q->next;
+	free(q);
+	return head;
+}
+int Locate(stu *p,long long a)
+{
+	if(a==head->xh)
+	{
+		head=head->next;
+		free(p);
+		return 1;
+}
+	else
+	{
+		stu *q;
+		while(p->next!=NULL&&p->xh!=a)
+		{
+			q=p;
+			p=p->next;
+			if(p->xh==a)
+			{
+			   Delete(q,p);
+			   return 1;	
+			}
+		}
+		return -1;
+	}
+}
+int main()
+{
+	stu *p=create();
+    value(head);
+    printf("请输入要删除的学号\n");
+    long long a;
+	scanf("%lld",&a);
+    if(Locate(p,a)==-1)
+    printf("找不到该学号\n");
+    else
+    printf("已找到该学号，并删除\n");
+    value(head);
+} 
